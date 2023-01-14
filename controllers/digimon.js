@@ -15,31 +15,36 @@ async function getDigimonsHandler(req,res) {
 
 async function addDigimonHandler(req,res) {
     // body
-    const {name, img, level} = req.body;
+    const { name, img, level } = req.body;
     let newDigimon = await digimonModel.create({
         digimonName: name,
         digimonLevel: level,
         digimonImg: img,
-    })
+    });
+    res.send(newDigimon);
 }
 
 async function deleteDigimonHandler(req,res) {
     const id = req.params.id;
     let deleteDigimon = await digimonModel.findByIdAndDelete(id);
     console.log(deleteDigimon)
-    res.send(`${deleteDigimon.digimonName} digimon has been deleted`)
+    // res.send(`${deleteDigimon.digimonName} digimon has been deleted`)
+    let allDigimons = await digimonModel.find({});
+    res.send(allDigimons)
 }
 
 async function updateDigimonHandler(req,res) {
     const id = req.params.id;
     const {digimonName,digimonLevel,digimonImg} = req.body;
     console.log('inside update', req.body);
-    let updatedDigimon = await digimonModel.findByIdAndUpdate(id, {
+    await digimonModel.findByIdAndUpdate(id, {
         digimonName,
         digimonLevel,
         digimonImg,
     })
-    res.send(updatedDigimon);
+    // res.send(updatedDigimon);
+    let allDigimons = await digimonModel.find({});
+    res.send(allDigimons);
 }
 
 module.exports = {
