@@ -3,9 +3,9 @@
 const axios = require('axios');
 const digimonModel = require("../models/digimon")
 
-async function getDigimonsHandler(req,res) {
-    res.send("Home route")
-}
+// async function getDigimonsHandler(req,res) {
+//     res.send("Home route")
+// }
 
 async function getDigimonsAPIHandler(req,res) {
     let allDigimons = await axios.get('https://digimon-api.vercel.app/api/digimon');

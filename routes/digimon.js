@@ -7,7 +7,7 @@ const digimonRouter = express.Router();
 const digimonHandlers = require("../controllers/digimon");
 
 
-digimonRouter.get("/", digimonHandlers.getDigimonsHandler)
+// digimonRouter.get("/", digimonHandlers.getDigimonsHandler)
 // GET: localhost:3003/digimonapi
 digimonRouter.get("/digimonapi",digimonHandlers.getDigimonsAPIHandler);
 
