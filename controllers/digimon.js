@@ -9,14 +9,16 @@ async function getDigimonsAPIHandler(req,res) {
 }
 
 async function getDigimonsHandler(req,res) {
-    let allDigimons = await digimonModel.find({});
+    let username = req.query.username;
+    let allDigimons = await digimonModel.find({username:username});
     res.send(allDigimons)
 }
 
 async function addDigimonHandler(req,res) {
     // body
-    const { name, img, level } = req.body;
+    const { name, img, level, email } = req.body;
     let newDigimon = await digimonModel.create({
+        username: email,
         digimonName: name,
         digimonLevel: level,
         digimonImg: img,
@@ -37,7 +39,7 @@ async function updateDigimonHandler(req,res) {
     const id = req.params.id;
     const {digimonName,digimonLevel,digimonImg} = req.body;
     console.log('inside update', req.body);
-    await digimonModel.findByIdAndUpdate(id, {
+    let updatedDigimon = await digimonModel.findByIdAndUpdate(id, {
         digimonName,
         digimonLevel,
         digimonImg,
